@@ -1,5 +1,6 @@
 import { apiClient } from "../configs";
-import { Notebook, NotebookPage } from "../models";
+import { Notebook, NotebookLoad, NotebookPage } from "../models";
+import { EngineLoad } from "../models/loads/EngineLoad";
 
 async function list(): Promise<Array<Notebook>> {
     let notebooks = await apiClient.get('/v1/notebooks');
@@ -13,9 +14,8 @@ async function get(id: number): Promise<Notebook> {
     return notebook.data;
 }
 
-async function create(load: any, notebook: Notebook): Promise<Notebook> {
+async function create<T extends EngineLoad>(load: NotebookLoad<T>, notebook: Notebook): Promise<Notebook> {
     let newNotebook = await apiClient.post('/v1/notebooks', {load, notebook});
-
 
     return newNotebook.data;
 }
@@ -30,7 +30,31 @@ async function listPage(id: number): Promise<Array<NotebookPage>> {
     let notebooks = await apiClient.get(`/v1/notebooks/${id}/pages`);
 
     return notebooks.data;
-    
 }
 
-export { list, get, create, update, listPage };
+async function createPage(id: number, page: NotebookPage): Promise<NotebookPage> {
+    let newPage = await apiClient.post(`/v1/notebooks/${id}/pages`, page);
+
+    return newPage.data;
+}
+
+async function updatePage(id: number, page: NotebookPage): Promise<NotebookPage> {
+    let updatedPage = await apiClient.put(`/v1/notebooks/${id}/pages/${page.id}`, page);
+
+    return updatedPage.data;
+}
+
+async function deletePage(id: number, pageId: number): Promise<void> {
+    await apiClient.delete(`/v1/notebooks/${id}/pages/${pageId}`);
+}
+
+async function listEngines(): Promise<Array<any>> {
+    let engines = await apiClient.get('/v1/engines');
+
+    return engines.data;
+}
+
+export {
+    list, get, create, update,
+    listPage, createPage, updatePage, deletePage
+};
