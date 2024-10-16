@@ -1,1 +1,1 @@
-export * as NotebookService from './NotebookService';
+export * from './NotebookService';

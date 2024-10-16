@@ -1,6 +1,25 @@
-import { apiClient } from "../configs";
+import { AxiosInstance } from "axios";
 import { Notebook, NotebookLoad, NotebookPage } from "../models";
 import { EngineLoad } from "../models/loads/EngineLoad";
+
+let apiClient: AxiosInstance
+
+function setApiClient(client: AxiosInstance) {
+    apiClient = client;
+}
+
+interface INotebookService {
+    setApiClient(client: AxiosInstance): void;
+    list(): Promise<Array<Notebook>>;
+    get(id: number): Promise<Notebook>;
+    create<T extends EngineLoad>(load: NotebookLoad<T>, notebook: Notebook): Promise<Notebook>;
+    update(id: number, notebook: Notebook): Promise<Notebook>;
+    listPage(id: number): Promise<Array<NotebookPage>>;
+    createPage(id: number, page: NotebookPage): Promise<NotebookPage>;
+    updatePage(id: number, page: NotebookPage): Promise<NotebookPage>;
+    deletePage(id: number, pageId: number): Promise<void>;
+    listEngines(): Promise<Array<any>>;
+}
 
 async function list(): Promise<Array<Notebook>> {
     let notebooks = await apiClient.get('/v1/notebooks');
@@ -54,7 +73,11 @@ async function listEngines(): Promise<Array<any>> {
     return engines.data;
 }
 
-export {
+const NotebookService: INotebookService = {
+    setApiClient,
     list, get, create, update,
-    listPage, createPage, updatePage, deletePage
+    listPage, createPage, updatePage, deletePage,
+    listEngines
 };
+
+export { NotebookService, INotebookService };

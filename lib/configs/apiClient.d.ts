@@ -1,2 +1,2 @@
-declare const apiClient: import("axios").AxiosInstance;
-export { apiClient };
+declare function createApiClient(baseURL: string): import("axios").AxiosInstance;
+export { createApiClient };
