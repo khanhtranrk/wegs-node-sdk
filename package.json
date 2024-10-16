@@ -4,6 +4,7 @@
   "description": "Wi Engine Service SDK for node",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "keywords": [],

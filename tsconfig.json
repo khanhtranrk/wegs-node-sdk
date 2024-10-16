@@ -5,7 +5,7 @@
     "strict": true,
     "esModuleInterop": true,
     "outDir": "./dist",
-    "rootDir": "."
+    "rootDir": "./src"
   },
-  "include": ["src/**/*", "tests/configs/config.test.ts"]
+  "include": ["src/**/*"]
 }
