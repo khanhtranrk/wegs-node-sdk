@@ -13,9 +13,9 @@ const defaultConfig = {
 let customConfig = {};
 
 if (fs.existsSync(configPath)) {
-    customConfig = require(configPath).default;
+    customConfig = require(configPath);
 } else {
-    console.warn('my-package.config.js file not found, using default configuration');
+    console.warn('wegs.config.js file not found, using default configuration');
 }
 
 
