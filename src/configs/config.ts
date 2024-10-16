@@ -1,27 +1,11 @@
-import path from 'path';
-import fs from 'fs';
+import 'dotenv/config'
 
 interface IConfig {
     baseURL: string;
 }
 
-const configPath = path.resolve(process.cwd(), 'wegs.config.js');
-const defaultConfig = {
-    baseURL: 'https://api.example.com',
-};
-
-let customConfig = {};
-
-if (fs.existsSync(configPath)) {
-    customConfig = require(configPath);
-} else {
-    console.warn('wegs.config.js file not found, using default configuration');
-}
-
-
 const config: IConfig = {
-    ...defaultConfig,
-    ...customConfig,
-}
+    baseURL: process.env.WEGS_SERVER_DOMAIN || 'https://api.example.com',
+};
 
 export { config, IConfig };
