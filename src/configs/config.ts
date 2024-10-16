@@ -5,15 +5,15 @@ interface IConfig {
     baseURL: string;
 }
 
-const configPath = path.resolve(process.cwd(), 'wegs.config.ts');
+const configPath = path.resolve(process.cwd(), 'wegs.config.js');
 const defaultConfig = {
     baseURL: 'https://api.example.com',
 };
 
-let customConfig = {default: {}};
+let customConfig = {};
 
 if (fs.existsSync(configPath)) {
-    customConfig = require(configPath);
+    customConfig = require(configPath).default;
 } else {
     console.warn('my-package.config.js file not found, using default configuration');
 }
@@ -21,9 +21,7 @@ if (fs.existsSync(configPath)) {
 
 const config: IConfig = {
     ...defaultConfig,
-    ...customConfig.default,
+    ...customConfig,
 }
-
-console.log('Custom config:', config);
 
 export { config, IConfig };

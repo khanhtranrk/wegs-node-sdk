@@ -9,8 +9,6 @@ const apiClient = axios.create({
   },
 });
 
-console.log('API Base URL:', config.baseURL);
-
 apiClient.interceptors.response.use(
   response => response,
   error => {
