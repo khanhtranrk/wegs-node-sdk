@@ -1,0 +1,11 @@
+import { Notebook, NotebookLoad, NotebookPage } from "../models";
+import { EngineLoad } from "../models/loads/EngineLoad";
+declare function list(): Promise<Array<Notebook>>;
+declare function get(id: number): Promise<Notebook>;
+declare function create<T extends EngineLoad>(load: NotebookLoad<T>, notebook: Notebook): Promise<Notebook>;
+declare function update(id: number, notebook: Notebook): Promise<Notebook>;
+declare function listPage(id: number): Promise<Array<NotebookPage>>;
+declare function createPage(id: number, page: NotebookPage): Promise<NotebookPage>;
+declare function updatePage(id: number, page: NotebookPage): Promise<NotebookPage>;
+declare function deletePage(id: number, pageId: number): Promise<void>;
+export { list, get, create, update, listPage, createPage, updatePage, deletePage };

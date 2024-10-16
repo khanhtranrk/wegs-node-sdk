@@ -1,0 +1,3 @@
+interface EngineLoad {
+}
+export { EngineLoad };
