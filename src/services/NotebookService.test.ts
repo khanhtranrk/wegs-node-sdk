@@ -126,9 +126,9 @@ describe('NotebookService', () => {
 
         mockedAxios.get.mockResolvedValue(response);
 
-        const result = await NotebookService.getPage(1, 1);
+        const result = await NotebookService.getPage(1, 'hash_time');
 
-        expect(mockedAxios.get).toHaveBeenCalledWith('/v1/notebooks/1/pages/1');
+        expect(mockedAxios.get).toHaveBeenCalledWith('/v1/notebooks/1/pages/hash_time');
         expect(result).toEqual(page);
     });
 
@@ -173,9 +173,9 @@ describe('NotebookService', () => {
     it('should delete a page in a notebook', async () => {
         mockedAxios.delete.mockResolvedValue({});
 
-        await NotebookService.deletePage(1, 1);
+        await NotebookService.deletePage(1, 'hash_time');
 
-        expect(mockedAxios.delete).toHaveBeenCalledWith('/v1/notebooks/1/pages/1');
+        expect(mockedAxios.delete).toHaveBeenCalledWith('/v1/notebooks/1/pages/hash_time');
     });
 
     it('should list engines', async () => {
