@@ -11,6 +11,7 @@ interface INotebookService {
     getPage(id: number, pageId: string): Promise<NotebookPage>;
     createPage(id: number, page: NotebookPage): Promise<NotebookPage>;
     updatePage(id: number, page: NotebookPage): Promise<NotebookPage>;
+    updatePageContent(id: number, page: NotebookPage): Promise<NotebookPage>;
     deletePage(id: number, pageId: string): Promise<void>;
     listEngines(): Promise<Array<any>>;
 }
