@@ -170,6 +170,25 @@ describe('NotebookService', () => {
         expect(result).toEqual(page);
     });
 
+    it('should update a page content in a notebook', async () => {
+        const page: NotebookPage = {
+            id: 'hash_time',
+            name: 'mock',
+            description: 'mock',
+            theme: 'mock',
+            content: 'mock',
+            parentId: 'mock',
+        };
+        const response = { data: page };
+
+        mockedAxios.put.mockResolvedValue(response);
+
+        const result = await NotebookService.updatePage(1, page);
+
+        expect(mockedAxios.put).toHaveBeenCalledWith(`/v1/notebooks/1/pages/${page.id}`, page);
+        expect(result).toEqual(page);
+    });
+
     it('should delete a page in a notebook', async () => {
         mockedAxios.delete.mockResolvedValue({});
 
