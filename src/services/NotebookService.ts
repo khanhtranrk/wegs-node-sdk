@@ -18,7 +18,7 @@ interface INotebookService {
     getPage(id: number, pageId: string): Promise<NotebookPage>;
     createPage(id: number, page: NotebookPage): Promise<NotebookPage>;
     updatePage(id: number, page: NotebookPage): Promise<NotebookPage>;
-    updatePageContent(id: number, pageId: string, page: NotebookPage): Promise<NotebookPage>;
+    updatePageContent(id: number, page: NotebookPage): Promise<NotebookPage>;
     deletePage(id: number, pageId: string): Promise<void>;
     listEngines(): Promise<Array<any>>;
 }
@@ -71,8 +71,8 @@ async function updatePage(id: number, page: NotebookPage): Promise<NotebookPage>
     return updatedPage.data;
 }
 
-async function updatePageContent(id: number, pageId: string, page: NotebookPage): Promise<NotebookPage> {
-    let updatedPage = await apiClient.put(`/v1/notebooks/${id}/pages/${pageId}/content`, page);
+async function updatePageContent(id: number, page: NotebookPage): Promise<NotebookPage> {
+    let updatedPage = await apiClient.put(`/v1/notebooks/${id}/pages/${page.id}/content`, page);
 
     return updatedPage.data;
 }
